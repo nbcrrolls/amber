@@ -1,0 +1,24 @@
+
+ifndef ROLLCOMPILER
+  ROLLCOMPILER = gnu
+endif
+COMPILERNAME := $(firstword $(subst /, ,$(ROLLCOMPILER)))
+
+ifndef ROLLNETWORK
+  ROLLNETWORK = eth
+endif
+
+NAME	= amber-$(COMPILERNAME)-$(ROLLNETWORK)
+VERSION	= 14
+RELEASE	= 1
+SUFFIX  = tar.bz2
+
+SOURCE_NAME    = Amber
+SOURCE_PKG     = $(SOURCE_NAME)$(VERSION).$(SUFFIX)
+SOURCE_DIR     = amber14
+
+TOOLS_NAME      = AmberTools
+TOOLS_PKG       = $(TOOLS_NAME)$(VERSION).$(SUFFIX)
+TOOLS_DIR       = $(TOOLS_PKG:%.$(SUFFIX)=%)
+
+PKGROOT = /opt/amber/$(COMPILERNAME)/$(ROLLNETWORK)
