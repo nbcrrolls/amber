@@ -17,6 +17,7 @@
 
 	<package>amber-ROLLCOMPILER-ROLLNETWORK</package>
 	<package>amber-module-ROLLCOMPILER-ROLLNETWORK</package>
+	<package>amber-roll-test</package>
 
 <post>
 </post>
