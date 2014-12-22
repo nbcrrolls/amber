@@ -15,7 +15,7 @@
 	<changelog>
 	</changelog>
 
-	<edge from="base" to=" amber-common"/>
+	<edge from="base" to="amber-common"/>
 	<order head="base">
 		<tail>amber-common</tail>
 	</order>
