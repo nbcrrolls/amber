@@ -70,6 +70,8 @@ install::
 	mkdir -p -m 754 $(ROOT)/$(PKGROOT)/src
 	cp $(SOURCE_DIR)/src/config.h $(ROOT)/$(PKGROOT)/src/
 	cp -r $(SOURCE_DIR)/bin $(SOURCE_DIR)/dat $(SOURCE_DIR)/include $(ROOT)/$(PKGROOT)
+	rm -rf $(ROOT)/$(PKGROOT)/bin/FEW.pl
+	cp $(SOURCE_DIR)/$(TOOLS_NAME)/src/FEW/FEW.pl  $(ROOT)/$(PKGROOT)/bin
 	cp -r $(SOURCE_DIR)/share $(SOURCE_DIR)/lib  $(ROOT)/$(PKGROOT)
 	(cd $(ROOT)/$(PKGROOT); ln -s lib lib64)
 
