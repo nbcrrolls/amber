@@ -1,4 +1,0 @@
-amber
-=====
-
-AMBER Molecular Dynamics
