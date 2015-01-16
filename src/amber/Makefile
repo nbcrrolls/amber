@@ -18,8 +18,9 @@ PKGROOT = /opt/amber
 REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
+include $(NBCRDEVEL)/NBCR.mk
 
-COMPILERSETUP = echo
+COMPILERSETUP = echo $(ROLLCOMPILER)
 
 ifeq ("$(ROLLCOMPILER)", "intel")
 COMPILERSETUP = \
@@ -30,29 +31,14 @@ COMPILERSETUP = \
   fi 
 endif
 
-MPIMODULE = $(ROLLMPI)_$(ROLLNETWORK)
-MPISETUP = \
-  if test -e /etc/profile.d/modules.sh; then \
-    . /etc/profile.d/modules.sh; \
-    module load $(ROLLCOMPILER)/$(MPIMODULE); \
-  fi; \
-  echo Using MPI from $${MPIHOME} 
-
-CUDASETUP = \
-  if test -e /etc/profile.d/modules.sh; then \
-    . /etc/profile.d/modules.sh; \
-    module load cuda; \
-  fi; \
-  export CUDA_HOME=/opt/cuda; \
-  echo Using CUDA from $${CUDA_HOME} 
+MPIMODULE = $(ROLLMPI)-$(ROLLCOMPILER)-$(ROLLNETWORK)
 
 build:
 	bzip2 -dc $(SOURCE_PKG) | tar xf -
 	bzip2 -dc $(TOOLS_PKG) | tar xf -
 	( \
-	  $(COMPILERSETUP); \
-	  $(MPISETUP); \
-	  $(CUDASETUP); \
+	  $(MODULE_LOAD_CC); \
+	  $(MODULE_LOAD_MPI); \
 	  export AMBERHOME=`pwd`/$(SOURCE_DIR); \
 	  cd $${AMBERHOME}; pwd ; \
 	  ./update_amber --update ; \
@@ -60,10 +46,15 @@ build:
 	  make -j8 install;  make clean; \
 	  ./configure -mpi $(ROLLCOMPILER); \
 	  make -j8 install; make clean; \
-	  ./configure -cuda $(ROLLCOMPILER); \
-	  make -j8 install; make clean; \
-	  ./configure -cuda -mpi $(ROLLCOMPILER); \
-	  make -j8 install; make clean; \
+	  if test -e $(CUDAHOME); then \
+	    module load cuda; \
+	    export CUDA_HOME=/opt/cuda; \
+	    echo "Using CUDA from $(CUDAHOME)"; \
+	    ./configure -cuda $(ROLLCOMPILER); \
+	    make -j8 install; make clean; \
+	    ./configure -cuda -mpi $(ROLLCOMPILER); \
+	    make -j8 install; make clean; \
+	  fi \
 	)
 
 install::

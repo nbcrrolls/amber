@@ -72,8 +72,11 @@ ADDSED = \
 	echo $(ROLLNETWORK)
 	$(SED) $(SEDSCRIPT) $(ADDSED) $^ > $@
 
-
 pretar:: $(VERSION.MK.INCLUDE)
+
+# if cuda exists set to add to loaded modules
+CUDA = 
+CUDA = $(shell if [ -x $(CUDAHOME) ]; then echo cuda ; fi;)
 
 $(VERSION.MK.INCLUDE): 
 	if [ -f $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) ]; then \
