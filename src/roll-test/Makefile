@@ -64,5 +64,7 @@ build:
 
 install:: roll-test-install
 	$(SED) -i -e s%ROLLNETWORK%$(ROLLNETWORK)%g $(ROOT)/$(PKGROOT)/amber.t
+	mkdir -p $(ROOT)/$(BENCHROOT)
+	$(INSTALL) -m644 $(BENCHMARK_SUITE) $(ROOT)/$(BENCHROOT)
 
 clean::

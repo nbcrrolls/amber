@@ -21,6 +21,9 @@ Downloads
 Amber is a licensed software. Get licensed files for AMBAER and AmberTools from 
 Amarolab and save copy in nbcr.ucsd@gmail.com account
 Download the appropriate amber source files into the ``src/amber``.
+Download the benchmark suite in src/amber-test: ::
+ 
+    # cd src/amber-test; wget http://ambermd.org/Amber14_Benchmark_Suite.tar.bz2
 
 
 Building the roll
@@ -64,6 +67,7 @@ Tthe roll installs amber and environment module files in: ::
     /opt/amber/intel - compiled with Intel compilers
     /opt/modulefiles/applications/amber<VERSION> - environment modules
     /root/rolltests/amber.t  - roll installation test
+    /opt/amber/benchmark/Amber14_Benchmark_Suite.tar.bz2 - benchmark suit distro
 
 
 **Testing**
@@ -73,4 +77,8 @@ installation of the roll binaries and module files. To
 run the test scripts execute the following command(s): ::
 
     # /root/rolltests/amber.t 
+
+A benchmark suit distro (from Amber site) contains a shell script run_bench_CPU+GPU.sh
+and required input to run suite of tests. Untar, adjust cpu and gpu counts in the script
+for a specific host. 
 
