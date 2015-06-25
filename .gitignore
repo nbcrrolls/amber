@@ -20,3 +20,5 @@ rocks-*.mk
 
 # ignore protected src files
 src/amber/*bz2
+src/roll-test/*.bz2
+
