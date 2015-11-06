@@ -70,6 +70,26 @@ Tthe roll installs amber and environment module files in: ::
     /opt/amber/benchmark/Amber14_Benchmark_Suite.tar.bz2 - benchmark suit distro
 
 
+Building GaMD version of roll
+-----------------------------
+
+For Sep 2015 workshop  buid `amberGaMD` roll based on a received patch for amber14 source 
+Create the following changes to the roll source: ::
+
+       modified:   src/amber-modules/amber.module.in
+       modified:   src/amber-modules/version.mk
+       modified:   src/amber/Makefile
+       modified:   src/amber/version.mk
+       modified:   version.mk
+
+       replace in graphs/default: amber.xml with amberGaMD.xml
+       replace in nodes: amber-common.xml.in with amberGaMD-common.xml.in
+
+       add a patch to src/amber/ (patch received via email from author, source )
+
+See diffs for the above files in GaMD-diffs file at the top of the roll.
+After creating changes build `amberGaMD` roll
+
 **Testing**
 
 A test script ``amber.t`` can be run to verify proper
